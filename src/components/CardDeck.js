@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
+  Divider,
   Tag,
   Flex,
   Stack,
@@ -59,7 +60,12 @@ export const CardDeck = ({ reset }) => {
       justify={'center'}
       >
       <Stack
+        w={'500px'}
+        onClick={drawCard}
+        cursor={'pointer'}
         boxShadow={'2xl'}
+        align={'center'}
+        justify={'center'}
         bg={useColorModeValue('white', 'gray.700')}
         rounded={'xl'}
         px={10}
@@ -81,23 +87,7 @@ export const CardDeck = ({ reset }) => {
             {headerText}
           </Heading>
         </Stack>
-        <Stack spacing={4} direction={{ base: 'column', md: 'row' }} w={'full'}>
-          <Button
-            onClick={drawCard}
-            bg={'blue.400'}
-            rounded={'full'}
-            color={'white'}
-            flex={'1 0 auto'}
-            _hover={{ bg: 'blue.500' }}
-            _focus={{ bg: 'blue.500' }}>
-            Draw card
-            <Icon
-              ml="4"
-              fontSize="16"
-              as={FiArrowRight}
-            />
-          </Button>
-        </Stack>
+        <Divider />
         <Stack align={'center'}>
           <Heading
             pt={3}

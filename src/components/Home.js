@@ -81,7 +81,7 @@ const SidebarContent = ({ onClose, setReset, reset, ...rest }) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       <ColorModeSwitcher />
-      <NavItem icon={FaUndo} onClick={() => setReset(!reset)}>
+      <NavItem icon={FaUndo} onClick={() => {setReset(!reset); onClose()}}>
         Reset
       </NavItem>
     </Box>
