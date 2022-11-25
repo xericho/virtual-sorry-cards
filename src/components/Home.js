@@ -6,23 +6,18 @@ import {
   Flex,
   Icon,
   useColorModeValue,
-  Link,
   Drawer,
   DrawerContent,
   Text,
   Heading,
   useDisclosure,
-  useState,
 } from '@chakra-ui/react';
 import {
   FaUndo
 } from 'react-icons/fa';
 import {
   FiMenu,
-  FiSun,
 } from 'react-icons/fi';
-import { IconType } from 'react-icons';
-import { ReactText } from 'react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { CardDeck } from './CardDeck';
 
