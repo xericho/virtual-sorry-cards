@@ -8,19 +8,14 @@ import {
 } from '@chakra-ui/react';
 import { TinderLikeCard } from 'react-stack-cards'
 import { buildSorryDeck, shuffleDeck } from "./sorryConfig.js"
+import { FancyCardDeck } from './FancyCardDeck';
 
 let drawPile = buildSorryDeck()
 drawPile = shuffleDeck(drawPile)
 
-export const CardDeck = ({ reset, discardPile, setDiscardPile }) => {
+export const CardDeck = ({ reset, discardPile, setDiscardPile, shuffle }) => {
     const [card, setCard] = useState(null)
     const [tagText, setTagText] = useState(`${drawPile.length} cards left`)
-    const tinder = useRef(null);
-    const arr = ["first", "second", "third", "fourth"]
-    const numbers = [0, 1, 2, 3]
-    const onTinderSwipe = (t) => {
-      t.swipe()
-    }
 
     const drawCard = () => {
         if(drawPile.length === 0) {
@@ -31,17 +26,19 @@ export const CardDeck = ({ reset, discardPile, setDiscardPile }) => {
         setCard(card)
         setDiscardPile([card, ...discardPile])
         setTagText(`${drawPile.length} cards left`)
-        console.log(card)
     }
 
     useEffect(() => {
-        console.log('Resetting cards...')
         drawPile = buildSorryDeck()
         drawPile = shuffleDeck(drawPile)
         setCard(null)
         setDiscardPile([])
         setTagText(`${drawPile.length} cards left`)
     }, [reset])
+
+    useEffect(() => {
+        drawPile = shuffleDeck(drawPile)
+    }, [shuffle])
 
     const rotateStyle = { transform: 'rotate(180deg)' }
 
