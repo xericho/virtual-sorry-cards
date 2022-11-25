@@ -28,39 +28,13 @@ import {
 } from 'react-icons/fi';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { CardDeck } from './CardDeck';
-import { buildSorryDeck, shuffleDeck } from "./sorryConfig.js"
 
-
-let drawPile = buildSorryDeck()
-drawPile = shuffleDeck(drawPile)
 
 export const Home = ({ children }) => {
+  const [reset, setReset] = useState(false)
+  const [discardPile, setDiscardPile] = useState([])
   const { isOpen: isSidebarOpen, onOpen: onSidebarOpen, onClose: onSidebarClose } = useDisclosure();
   const { isOpen: isHistoryOpen, onOpen: onHistoryOpen, onClose: onHistoryClose } = useDisclosure()
-  const [card, setCard] = useState(null)
-  const [tagText, setTagText] = useState(`${drawPile.length} cards left`)
-  const [discardPile, setDiscardPile] = useState([])
-
-    const drawCard = () => {
-        if(drawPile.length === 0) {
-            drawPile = buildSorryDeck()
-            drawPile = shuffleDeck(drawPile)
-        }
-        const card = drawPile.pop()
-        setCard(card)
-        setDiscardPile([...discardPile, card])
-        setTagText(`${drawPile.length} cards left`)
-        console.log(discardPile)
-        console.log(card)
-    }
-
-    const resetDeck = () => {
-        console.log('Resetting cards...')
-        drawPile = buildSorryDeck()
-        drawPile = shuffleDeck(drawPile)
-        setCard(null)
-        setTagText(`${drawPile.length} cards left`)
-    }
 
 
   return (
@@ -68,7 +42,8 @@ export const Home = ({ children }) => {
 
       <SidebarContent
         onClose={onSidebarClose}
-        resetDeck={resetDeck}
+        setReset={setReset}
+        reset={reset}
         onHistoryOpen={onHistoryOpen}
         display={{ base: 'none', md: 'block' }}
       />
@@ -78,26 +53,28 @@ export const Home = ({ children }) => {
         onClose={onSidebarClose}
         size="full">
         <DrawerContent>
-          <SidebarContent onClose={onSidebarClose} resetDeck={resetDeck} onHistoryOpen={onHistoryOpen}/>
+          <SidebarContent onClose={onSidebarClose} setReset={setReset} reset={reset} onHistoryOpen={onHistoryOpen}/>
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
       <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onSidebarOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
 
-        <CardDeck card={card} tagText={tagText} drawCard={drawCard} />
+        <CardDeck reset={reset} discardPile={discardPile} setDiscardPile={setDiscardPile} />
 
         {children}
 
       </Box>
 
-      <Modal isOpen={isHistoryOpen} onClose={onHistoryClose}>
+      <Modal isOpen={isHistoryOpen} onClose={onHistoryClose} scrollBehavior={'inside'} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent mx={5} pl={5}>
           <ModalHeader>History</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            <Text color="gray.400">RECENT</Text>
             {discardPile.map((card, i) => <Text key={i}>{card.type}</Text>)}
+            <Text color="gray.400">OLDEST</Text>
           </ModalBody>
           <ModalFooter>
             <Button colorScheme='blue' mr={3} onClick={onHistoryClose}>
@@ -112,7 +89,7 @@ export const Home = ({ children }) => {
 }
 
 
-const SidebarContent = ({ onClose, resetDeck, onHistoryOpen, ...rest }) => {
+const SidebarContent = ({ onClose, setReset, reset, onHistoryOpen, ...rest }) => {
   return (
     <Box
       bg={useColorModeValue('white', 'gray.700')}
@@ -132,7 +109,7 @@ const SidebarContent = ({ onClose, resetDeck, onHistoryOpen, ...rest }) => {
       <NavItem icon={FaHistory} onClick={() => {onClose(); onHistoryOpen()}}>
         History
       </NavItem>
-      <NavItem icon={FaUndo} onClick={() => {resetDeck(); onClose()}}>
+      <NavItem icon={FaUndo} onClick={() => {setReset(!reset); onClose()}}>
         Reset
       </NavItem>
     </Box>
