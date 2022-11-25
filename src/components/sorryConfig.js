@@ -1,17 +1,17 @@
 import {
   Image,
 } from '@chakra-ui/react';
-import card1 from '../assets/1.png'
-import card2 from '../assets/2.png'
-import card3 from '../assets/3.png'
-import card4 from '../assets/4.png'
-import card5 from '../assets/5.png'
-import card7 from '../assets/7.png'
-import card8 from '../assets/8.png'
-import card10 from '../assets/10.png'
-import card11 from '../assets/11.png'
-import card12 from '../assets/12.png'
-import cardsorry from '../assets/sorry.png'
+import card1 from '../assets/1.webp'
+import card2 from '../assets/2.webp'
+import card3 from '../assets/3.webp'
+import card4 from '../assets/4.webp'
+import card5 from '../assets/5.webp'
+import card7 from '../assets/7.webp'
+import card8 from '../assets/8.webp'
+import card10 from '../assets/10.webp'
+import card11 from '../assets/11.webp'
+import card12 from '../assets/12.webp'
+import cardsorry from '../assets/sorry.webp'
 
 
 const sorryDescriptions = {
