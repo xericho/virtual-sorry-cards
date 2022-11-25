@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import {
   Text,
   Tag,
@@ -6,38 +6,15 @@ import {
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { Dealer } from "card-dealer";
-import { sorryDeck } from "./config.js"
+import { TinderLikeCard } from 'react-stack-cards'
 
-
-let dealer = new Dealer(sorryDeck);
-dealer.shuffle()
-
-export const CardDeck = ({ reset }) => {
-    const [card, setCard] = useState(null)
-    const [cardsLeft, setCardsLeft] = useState(dealer.remainingCards())
-    const [tagText, setTagText] = useState(`${dealer.remainingCards()} cards left`)
-
-    const drawCard = () => {
-        if(dealer.remainingCards() === 0) {
-            dealer = new Dealer(sorryDeck);
-            dealer.shuffle()
-        }
-        const card = dealer.draw(1)[0]
-        setCard(card)
-        setCardsLeft(dealer.remainingCards())
-        setTagText(`${dealer.remainingCards()} cards left`)
-        console.log(card)
+export const CardDeck = ({ card, tagText, drawCard }) => {
+    const tinder = useRef(null);
+    const arr = ["first", "second", "third", "fourth"]
+    const numbers = [0, 1, 2, 3]
+    const onTinderSwipe = (t) => {
+      t.swipe()
     }
-
-    useEffect(() => {
-        console.log('Resetting cards...')
-        dealer = new Dealer(sorryDeck);
-        dealer.shuffle()
-        setCard(null)
-        setCardsLeft(dealer.remainingCards())
-        setTagText(`${dealer.remainingCards()} cards left`)
-    }, [reset])
 
     const rotateStyle = { transform: 'rotate(180deg)' }
 

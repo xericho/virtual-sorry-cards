@@ -42,7 +42,7 @@ const sorryImgs = {
     "Sorry!": cardsorry,
 }
 
-const sorryConfig = {
+const sorryDist = {
     1: 5,
     2: 4,
     3: 4,
@@ -56,9 +56,22 @@ const sorryConfig = {
     "Sorry!": 4,
 }
 
-const initSorryDeck = () => {
+
+/*
+ * Fisher-Yates shuffling algorithm
+ */
+export const shuffleDeck = (deck) => {
+  for (let remaining = deck.length - 1; remaining > 0; remaining--) {
+    const swap = Math.floor(Math.random() * (remaining + 1));
+    [deck[remaining], deck[swap]] = [deck[swap], deck[remaining]];
+  }
+  return deck;
+}
+
+
+export const buildSorryDeck = () => {
     const deck = []
-    for (const [key, value] of Object.entries(sorryConfig)) {
+    for (const [key, value] of Object.entries(sorryDist)) {
         for(let i=0; i < value; i++) {
             deck.push({
                 'type': key,
@@ -67,7 +80,7 @@ const initSorryDeck = () => {
             })
         }
     }
-    return deck
+    return shuffleDeck(deck)
 }
 
-export const sorryDeck = initSorryDeck()
+
