@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import {
+  Image,
   Text,
   Tag,
   Flex,
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react';
+import StartSvg from '../assets/start.svg'
 import { buildSorryDeck, shuffleDeck } from "./sorryConfig.js"
 import { FancyCardDeck } from './FancyCardDeck';
 
@@ -64,7 +66,8 @@ export const CardDeck = ({ reset, discardPile, setDiscardPile, shuffle }) => {
 
           {card
               ? card.img
-              : <Text fontSize={'xl'} color={'gray.500'} py={8}>Click to draw a card.</Text>
+              : <Image src={StartSvg} alt={'Start'} maxHeight={'20rem'} m={0}
+                boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="10rem" />
           }
 
           <Stack py={2}>

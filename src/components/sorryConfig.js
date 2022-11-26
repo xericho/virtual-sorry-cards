@@ -76,7 +76,7 @@ export const buildSorryDeck = () => {
             deck.push({
                 'type': key,
                 'description': sorryDescriptions[key],
-                'img': <Image src={sorryImgs[key]} alt={key} h={'500px'} m={0}
+                'img': <Image src={sorryImgs[key]} alt={key} maxHeight={'500px'} m={0}
                         boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="1.5rem" />
             })
         }
