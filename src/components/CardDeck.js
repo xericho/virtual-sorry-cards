@@ -43,6 +43,8 @@ export const CardDeck = ({ reset, discardPile, setDiscardPile, shuffle }) => {
 
     const rotateStyle = { transform: 'rotate(180deg)' }
 
+    let curCard = useColorModeValue(card && card.img, card && card.img_dark)
+
   return (
     <Flex
       minH={'70vh'}
@@ -65,9 +67,9 @@ export const CardDeck = ({ reset, discardPile, setDiscardPile, shuffle }) => {
           </Stack>
 
           {card
-              ? card.img
+              ? curCard
               : <Image src={StartSvg} alt={'Start'} maxHeight={'20rem'} m={0}
-                boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="10rem" />
+                boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="full" />
           }
 
           <Stack py={2}>

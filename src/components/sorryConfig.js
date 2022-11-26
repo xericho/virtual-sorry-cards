@@ -1,6 +1,17 @@
 import {
   Image,
 } from '@chakra-ui/react';
+import card1_dark from '../assets/1_dark.svg'
+import card2_dark from '../assets/2_dark.svg'
+import card3_dark from '../assets/3_dark.svg'
+import card4_dark from '../assets/4_dark.svg'
+import card5_dark from '../assets/5_dark.svg'
+import card7_dark from '../assets/7_dark.svg'
+import card8_dark from '../assets/8_dark.svg'
+import card10_dark from '../assets/10_dark.svg'
+import card11_dark from '../assets/11_dark.svg'
+import card12_dark from '../assets/12_dark.svg'
+import cardsorry_dark from '../assets/sorry_dark.svg'
 import card1 from '../assets/1.svg'
 import card2 from '../assets/2.svg'
 import card3 from '../assets/3.svg'
@@ -25,9 +36,22 @@ const sorryDescriptions = {
     10: "Move forward 10 or move backward 1.",
     11: "Move forward 11 or change places with an opponent.",
     12: "Move forward 12.",
-    "Sorry!": "Move a pawn from your start area to take the place of another player's pawn, which must return to its own start area. Or move forward 4.",
+    "Sorry?": "Move a pawn from your start area to take the place of another player's pawn, which must return to its own start area. Or move forward 4.",
 }
 
+const sorryImgsDark = {
+    1: card1_dark,
+    2: card2_dark,
+    3: card3_dark,
+    4: card4_dark,
+    5: card5_dark,
+    7: card7_dark,
+    8: card8_dark,
+    10: card10_dark,
+    11: card11_dark,
+    12: card12_dark,
+    "Sorry?": cardsorry_dark,
+}
 const sorryImgs = {
     1: card1,
     2: card2,
@@ -39,7 +63,7 @@ const sorryImgs = {
     10: card10,
     11: card11,
     12: card12,
-    "Sorry!": cardsorry,
+    "Sorry?": cardsorry,
 }
 
 const sorryDist = {
@@ -53,7 +77,7 @@ const sorryDist = {
     10: 4,
     11: 4,
     12: 4,
-    "Sorry!": 4,
+    "Sorry?": 4,
 }
 
 
@@ -76,8 +100,10 @@ export const buildSorryDeck = () => {
             deck.push({
                 'type': key,
                 'description': sorryDescriptions[key],
-                'img': <Image src={sorryImgs[key]} alt={key} maxHeight={'500px'} m={0}
-                        boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="1.5rem" />
+                'img': <Image src={sorryImgs[key]} alt={key} maxHeight={'500px'} m={0} loading={'eager'}
+                        boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="1.5rem" />,
+                'img_dark': <Image src={sorryImgsDark[key]} alt={key} maxHeight={'500px'} m={0} loading={'eager'}
+                        boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="1.5rem" />,
             })
         }
     }

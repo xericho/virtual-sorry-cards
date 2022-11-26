@@ -115,7 +115,7 @@ const SidebarContent = ({ onClose, setReset, reset, onHistoryOpen, shuffle, setS
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      <ColorModeSwitcher />
+      <ColorModeSwitcher onClose={onClose} />
       <NavItem icon={FaRandom} onClick={() => {setShuffle(!shuffle); onClose()}}>
         Shuffle Deck
       </NavItem>
