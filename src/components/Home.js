@@ -83,7 +83,7 @@ export const Home = ({ children }) => {
           <ModalCloseButton />
           <ModalBody>
             <Text color="gray.400" pb={3}>RECENT</Text>
-            {discardPile.map((card, i) => <Text key={i}>{card.type}</Text>)}
+            {discardPile.map((card, i) => <Text key={i}>{card}</Text>)}
             <Text color="gray.400" pt={3}>OLDEST</Text>
           </ModalBody>
           <ModalFooter pt={0}>

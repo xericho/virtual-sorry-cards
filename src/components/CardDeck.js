@@ -1,3 +1,4 @@
+import { FancyCardDeck } from './FancyCardDeck';
 import { useEffect, useState } from 'react'
 import {
   Image,
@@ -8,8 +9,12 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import StartSvg from '../assets/start.svg'
-import { buildSorryDeck, shuffleDeck } from "./sorryConfig.js"
-import { FancyCardDeck } from './FancyCardDeck';
+import {
+    buildSorryDeck,
+    shuffleDeck,
+    sorryImgs,
+    sorryImgsDark
+} from "./sorryConfig.js"
 
 let drawPile = buildSorryDeck()
 drawPile = shuffleDeck(drawPile)
@@ -41,9 +46,9 @@ export const CardDeck = ({ reset, discardPile, setDiscardPile, shuffle }) => {
         drawPile = shuffleDeck(drawPile)
     }, [shuffle])
 
-    const rotateStyle = { transform: 'rotate(180deg)' }
+    const rotateText = { transform: 'rotate(180deg)' }
 
-    let curCard = useColorModeValue(card && card.img, card && card.img_dark)
+    let cardImg = useColorModeValue(sorryImgs[card], sorryImgsDark[card])
 
   return (
     <Flex
@@ -63,17 +68,17 @@ export const CardDeck = ({ reset, discardPile, setDiscardPile, shuffle }) => {
       >
         <Stack align={'center'} spacing={2}>
           <Stack py={2}>
-            <Tag style={rotateStyle}>{tagText}</Tag>
+            <Tag>{tagText}</Tag>
           </Stack>
 
           {card
-              ? curCard
+              ? <Image src={cardImg} alt={card} maxHeight={'500px'} m={0} loading={'eager'} boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="1.5rem" />
               : <Image src={StartSvg} alt={'Start'} maxHeight={'20rem'} m={0}
                 boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="full" />
           }
 
           <Stack py={2}>
-            <Tag >{tagText}</Tag>
+            <Tag style={rotateText}>{tagText}</Tag>
           </Stack>
         </Stack>
       </Stack>

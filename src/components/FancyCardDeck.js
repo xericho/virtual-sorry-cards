@@ -1,5 +1,6 @@
 import React from 'react'
 import { TinderLikeCard } from 'react-stack-cards'
+import stonks from '../assets/stonks.jpeg'
 
 export class FancyCardDeck extends React.Component {
   constructor(props){
@@ -15,14 +16,10 @@ export class FancyCardDeck extends React.Component {
   }
 
   render() {
-      const first =
-        "https://cdn.pixabay.com/photo/2017/05/06/21/19/strawberry-2290969_960_720.jpg";
-      const second =
-        "https://cdn.pixabay.com/photo/2017/05/06/21/19/strawberry-2290969_960_720.jpg";
-      const third =
-        "https://cdn.pixabay.com/photo/2017/05/06/21/19/strawberry-2290969_960_720.jpg";
-      const fourth =
-        "https://cdn.pixabay.com/photo/2017/05/06/21/19/strawberry-2290969_960_720.jpg";
+      const first = stonks
+      const second = stonks
+      const third = stonks
+      const fourth = stonks
       const arr = [first, second, third, fourth]
       let arr1 = [first, second, third, fourth]
 

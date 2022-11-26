@@ -1,6 +1,3 @@
-import {
-  Image,
-} from '@chakra-ui/react';
 import card1_dark from '../assets/1_dark.svg'
 import card2_dark from '../assets/2_dark.svg'
 import card3_dark from '../assets/3_dark.svg'
@@ -25,7 +22,7 @@ import card12 from '../assets/12.svg'
 import cardsorry from '../assets/sorry.svg'
 
 
-const sorryDescriptions = {
+export const sorryDescriptions = {
     1: "Move a pawn from START or if in play, move forward 1 space.",
     2: "Move a pawn from START or if in play, move forward 2 space.",
     3: "Move forward 3.",
@@ -39,7 +36,7 @@ const sorryDescriptions = {
     "Sorry?": "Move a pawn from your start area to take the place of another player's pawn, which must return to its own start area. Or move forward 4.",
 }
 
-const sorryImgsDark = {
+export const sorryImgsDark = {
     1: card1_dark,
     2: card2_dark,
     3: card3_dark,
@@ -52,7 +49,8 @@ const sorryImgsDark = {
     12: card12_dark,
     "Sorry?": cardsorry_dark,
 }
-const sorryImgs = {
+
+export const sorryImgs = {
     1: card1,
     2: card2,
     3: card3,
@@ -66,7 +64,7 @@ const sorryImgs = {
     "Sorry?": cardsorry,
 }
 
-const sorryDist = {
+const sorryDistribution = {
     1: 5,
     2: 4,
     3: 4,
@@ -94,18 +92,9 @@ export const shuffleDeck = (deck) => {
 
 
 export const buildSorryDeck = () => {
-    const deck = []
-    for (const [key, value] of Object.entries(sorryDist)) {
-        for(let i=0; i < value; i++) {
-            deck.push({
-                'type': key,
-                'description': sorryDescriptions[key],
-                'img': <Image src={sorryImgs[key]} alt={key} maxHeight={'500px'} m={0} loading={'eager'}
-                        boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="1.5rem" />,
-                'img_dark': <Image src={sorryImgsDark[key]} alt={key} maxHeight={'500px'} m={0} loading={'eager'}
-                        boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="1.5rem" />,
-            })
-        }
+    let deck = []
+    for (const [key, value] of Object.entries(sorryDistribution)) {
+        deck = [...deck, ...Array(value).fill(key)]
     }
     return shuffleDeck(deck)
 }
