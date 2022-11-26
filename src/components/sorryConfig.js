@@ -1,17 +1,17 @@
 import {
   Image,
 } from '@chakra-ui/react';
-import card1 from '../assets/1.webp'
-import card2 from '../assets/2.webp'
-import card3 from '../assets/3.webp'
-import card4 from '../assets/4.webp'
-import card5 from '../assets/5.webp'
-import card7 from '../assets/7.webp'
-import card8 from '../assets/8.webp'
-import card10 from '../assets/10.webp'
-import card11 from '../assets/11.webp'
-import card12 from '../assets/12.webp'
-import cardsorry from '../assets/sorry.webp'
+import card1 from '../assets/1.svg'
+import card2 from '../assets/2.svg'
+import card3 from '../assets/3.svg'
+import card4 from '../assets/4.svg'
+import card5 from '../assets/5.svg'
+import card7 from '../assets/7.svg'
+import card8 from '../assets/8.svg'
+import card10 from '../assets/10.svg'
+import card11 from '../assets/11.svg'
+import card12 from '../assets/12.svg'
+import cardsorry from '../assets/sorry.svg'
 
 
 const sorryDescriptions = {
@@ -76,7 +76,8 @@ export const buildSorryDeck = () => {
             deck.push({
                 'type': key,
                 'description': sorryDescriptions[key],
-                'img': <Image src={sorryImgs[key]} alt={key} h={'500px'}/>
+                'img': <Image src={sorryImgs[key]} alt={key} h={'500px'} m={0}
+                        boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="1.5rem" />
             })
         }
     }

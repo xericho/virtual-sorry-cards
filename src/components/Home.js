@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Button,
   Modal,
@@ -111,7 +111,7 @@ const SidebarContent = ({ onClose, setReset, reset, onHistoryOpen, shuffle, setS
       {...rest}>
       <Flex alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" py='2rem'>
-          Virtual Sorry! Cards
+          Virtual Sorry? Cards
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
@@ -172,7 +172,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       />
 
       <Heading fontSize="xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        Virtual Sorry! Cards
+        Virtual Sorry? Cards
       </Heading>
     </Flex>
   );

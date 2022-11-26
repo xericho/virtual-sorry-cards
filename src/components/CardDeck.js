@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Text,
   Tag,
@@ -6,7 +6,6 @@ import {
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { TinderLikeCard } from 'react-stack-cards'
 import { buildSorryDeck, shuffleDeck } from "./sorryConfig.js"
 import { FancyCardDeck } from './FancyCardDeck';
 
@@ -52,10 +51,9 @@ export const CardDeck = ({ reset, discardPile, setDiscardPile, shuffle }) => {
         w={'500px'}
         onClick={drawCard}
         cursor={'pointer'}
-        boxShadow={'2xl'}
         align={'center'}
         justify={'center'}
-        bg={useColorModeValue('white', 'gray.700')}
+        bg={useColorModeValue('gray.100', 'gray.900')}
         rounded={'xl'}
         spacing={8}
       >
