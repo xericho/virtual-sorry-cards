@@ -28,14 +28,16 @@ import {
 } from 'react-icons/fi';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { CardDeck } from './CardDeck';
+import { FancyCardDeck } from './FancyCardDeck';
 
 
-export const Home = ({ children }) => {
+export const Home = () => {
   const [reset, setReset] = useState(false)
-  const [shuffle, setShuffle] = useState(false)
   const [discardPile, setDiscardPile] = useState([])
   const { isOpen: isSidebarOpen, onOpen: onSidebarOpen, onClose: onSidebarClose } = useDisclosure();
   const { isOpen: isHistoryOpen, onOpen: onHistoryOpen, onClose: onHistoryClose } = useDisclosure()
+
+  const history = discardPile.reverse().map((card, i) => <Text key={i}>{card}</Text>)
 
 
   return (
@@ -45,8 +47,6 @@ export const Home = ({ children }) => {
         onClose={onSidebarClose}
         setReset={setReset}
         reset={reset}
-        setShuffle={setShuffle}
-        shuffle={shuffle}
         onHistoryOpen={onHistoryOpen}
         display={{ base: 'none', md: 'block' }}
       />
@@ -60,8 +60,6 @@ export const Home = ({ children }) => {
             onClose={onSidebarClose}
             setReset={setReset}
             reset={reset}
-            setShuffle={setShuffle}
-            shuffle={shuffle}
             onHistoryOpen={onHistoryOpen}
           />
         </DrawerContent>
@@ -69,11 +67,7 @@ export const Home = ({ children }) => {
       {/* mobilenav */}
       <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onSidebarOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-
-        <CardDeck reset={reset} discardPile={discardPile} setDiscardPile={setDiscardPile} shuffle={shuffle} />
-
-        {children}
-
+        <FancyCardDeck reset={reset} discardPile={discardPile} setDiscardPile={setDiscardPile}  />
       </Box>
 
       <Modal isOpen={isHistoryOpen} onClose={onHistoryClose} scrollBehavior={'inside'} isCentered>
@@ -82,8 +76,8 @@ export const Home = ({ children }) => {
           <ModalHeader>History</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text color="gray.400" pb={3}>RECENT</Text>
-            {discardPile.map((card, i) => <Text key={i}>{card}</Text>)}
+            <Text color="gray.400" pb={3}>CURRENT</Text>
+                {history.reverse()}
             <Text color="gray.400" pt={3}>OLDEST</Text>
           </ModalBody>
           <ModalFooter pt={0}>
@@ -99,7 +93,7 @@ export const Home = ({ children }) => {
 }
 
 
-const SidebarContent = ({ onClose, setReset, reset, onHistoryOpen, shuffle, setShuffle, ...rest }) => {
+const SidebarContent = ({ onClose, setReset, reset, onHistoryOpen, ...rest }) => {
   return (
     <Box
       bg={useColorModeValue('white', 'gray.700')}
@@ -116,9 +110,6 @@ const SidebarContent = ({ onClose, setReset, reset, onHistoryOpen, shuffle, setS
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       <ColorModeSwitcher onClose={onClose} />
-      <NavItem icon={FaRandom} onClick={() => {setShuffle(!shuffle); onClose()}}>
-        Shuffle Deck
-      </NavItem>
       <NavItem icon={FaHistory} onClick={() => {onClose(); onHistoryOpen()}}>
         History
       </NavItem>

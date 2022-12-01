@@ -1,42 +1,82 @@
-import React from 'react'
-import { TinderLikeCard } from 'react-stack-cards'
-import stonks from '../assets/stonks.jpeg'
+import { useEffect, useState } from 'react'
+import {
+  Image,
+  Tag,
+  Flex,
+  Stack,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import StartSvg from '../assets/start.svg'
+import {
+    buildSorryDeck,
+    shuffleDeck,
+} from "./sorryConfig.js"
+import { Card } from './Card.js'
 
-export class FancyCardDeck extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      directionTinder: "swipeCornerDownRight",
+
+let drawPile = buildSorryDeck()
+drawPile = shuffleDeck(drawPile)
+
+export const FancyCardDeck = ({ reset, discardPile, setDiscardPile }) => {
+    const [card, setCard] = useState(null)
+    const [tagText, setTagText] = useState(``)
+
+    const drawCard = () => {
+        if(drawPile.length === 0) {
+            drawPile = buildSorryDeck()
+            drawPile = shuffleDeck(drawPile)
+        }
+        const card = drawPile.pop()
+        setCard(card)
+        setDiscardPile([...discardPile, card])
+        setTagText(`${drawPile.length} cards left`)
     }
-    this.Tinder = null
-  }
 
-  onTinderSwipe() {
-    this.Tinder.swipe()
-  }
+    useEffect(() => {
+        drawPile = buildSorryDeck()
+        drawPile = shuffleDeck(drawPile)
+        setCard(null)
+        setDiscardPile([])
+        setTagText(``)
+    }, [reset])
 
-  render() {
-      const first = stonks
-      const second = stonks
-      const third = stonks
-      const fourth = stonks
-      const arr = [first, second, third, fourth]
-      let arr1 = [first, second, third, fourth]
+    const rotateText = { transform: 'rotate(180deg)' }
 
-    return (
-      <div>
-        <TinderLikeCard
-          images={arr1}
-          width="350"
-          height="240"
-          direction={this.state.directionTinder}
-          ref={(node) => this.Tinder = node}
-          className="tinder"
-        />
-        <button className="btnTinder" onClick={this.onTinderSwipe.bind(this)}>click me</button>
+    const cards = discardPile.map((cardIdx, i) => <Card cardIdx={cardIdx} key={i}/>)
 
-      </div>
-    );
-  }
+  return (
+    <Flex
+      minH={'70vh'}
+      align={'center'}
+      justify={'center'}
+      >
+      <Stack
+        w={'500px'}
+        onClick={drawCard}
+        cursor={'pointer'}
+        align={'center'}
+        justify={'center'}
+        bg={useColorModeValue('gray.100', 'gray.900')}
+        rounded={'xl'}
+        spacing={8}
+      >
+        <Stack align={'center'} spacing={2}>
+          <Stack py={2} style={{ position: 'absolute', top: '9rem' }}>
+            <Tag bg={''}>{tagText}</Tag>
+          </Stack>
+
+          {card
+              ? cards
+              : <Image src={StartSvg} alt={'Start'} maxHeight={'20rem'} style={{ position: 'absolute', margin: 'auto', top: 0, bottom: 0 }}
+                boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="full" />
+          }
+
+          <Stack py={2} style={{ position: 'absolute', bottom: '9rem' }}>
+            <Tag bg={''} style={rotateText}>{tagText}</Tag>
+          </Stack>
+        </Stack>
+      </Stack>
+    </Flex>
+  );
 }
 

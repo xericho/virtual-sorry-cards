@@ -1,8 +1,6 @@
-import { FancyCardDeck } from './FancyCardDeck';
 import { useEffect, useState } from 'react'
 import {
   Image,
-  Text,
   Tag,
   Flex,
   Stack,
@@ -19,7 +17,7 @@ import {
 let drawPile = buildSorryDeck()
 drawPile = shuffleDeck(drawPile)
 
-export const CardDeck = ({ reset, discardPile, setDiscardPile, shuffle }) => {
+export const CardDeck = ({ reset, discardPile, setDiscardPile }) => {
     const [card, setCard] = useState(null)
     const [tagText, setTagText] = useState(`${drawPile.length} cards left`)
 
@@ -41,10 +39,6 @@ export const CardDeck = ({ reset, discardPile, setDiscardPile, shuffle }) => {
         setDiscardPile([])
         setTagText(`${drawPile.length} cards left`)
     }, [reset])
-
-    useEffect(() => {
-        drawPile = shuffleDeck(drawPile)
-    }, [shuffle])
 
     const rotateText = { transform: 'rotate(180deg)' }
 
@@ -72,7 +66,8 @@ export const CardDeck = ({ reset, discardPile, setDiscardPile, shuffle }) => {
           </Stack>
 
           {card
-              ? <Image src={cardImg} alt={card} maxHeight={'500px'} m={0} loading={'eager'} boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="1.5rem" />
+              ? <Image src={cardImg} alt={card} maxHeight={'500px'} m={0}
+                  boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="1.5rem" />
               : <Image src={StartSvg} alt={'Start'} maxHeight={'20rem'} m={0}
                 boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="full" />
           }
