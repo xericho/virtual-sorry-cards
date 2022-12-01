@@ -61,17 +61,17 @@ export const FancyCardDeck = ({ reset, discardPile, setDiscardPile }) => {
         spacing={8}
       >
         <Stack align={'center'} spacing={2}>
-          <Stack py={2} style={{ position: 'absolute', top: '9rem' }}>
+          <Stack py={2} style={{ position: 'absolute', top: '8rem' }}>
             <Tag bg={''}>{tagText}</Tag>
           </Stack>
 
           {card
-              ? cards
+              ? cards.slice(-2)
               : <Image src={StartSvg} alt={'Start'} maxHeight={'20rem'} style={{ position: 'absolute', margin: 'auto', top: 0, bottom: 0 }}
                 boxShadow={'0px 0px 40px 10px rgba(0, 0, 0, 0.30)'} borderRadius="full" />
           }
 
-          <Stack py={2} style={{ position: 'absolute', bottom: '9rem' }}>
+          <Stack py={2} style={{ position: 'absolute', bottom: '8rem' }}>
             <Tag bg={''} style={rotateText}>{tagText}</Tag>
           </Stack>
         </Stack>
